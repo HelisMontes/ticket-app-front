@@ -1,10 +1,12 @@
 import React from 'react'
 import { Col, Row, Typography, List, Card, Tag, Divider } from 'antd';
 import data from '../data';
+import { useHideMenu } from '../hooks/useHideMenu';
 
 const { Text, Title } = Typography
 
 export const Cola = () => {
+  useHideMenu(true);
   return (
     <>
       <Title level={1}>Atendiendo al cliente</Title>
