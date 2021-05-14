@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Col, Row, Typography } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons'
+
 const { Text, Title } = Typography
+
 export const CrearTicket = () => {
   const newTicket = () => {
     console.log('New');
@@ -11,7 +13,7 @@ export const CrearTicket = () => {
       <Row>
         <Col span={14} offset={6} align="center">
           <Title level={3}>
-            Presione el botón para un nuevo t icket
+            Presione el botón para un nuevo ticket
           </Title>
           <Button
             type="primary"
