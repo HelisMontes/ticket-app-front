@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Input, Button, InputNumber, Typography, Divider } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 import { useHideMenu } from '../hooks/useHideMenu';
+import { getUserStorage } from '../helpers/getUserStorage';
 
 const {Title, Text} = Typography;
 const layout = {
@@ -16,10 +17,14 @@ const tailLayout = {
 
 export const Ingresar = () => {
   const history = useHistory();
+  const [user] = useState(getUserStorage());
+
   useHideMenu(false);
-  
+
   const onFinish = (values) => {
-    console.log('Success:', values);
+    const { agente, escritorio } = values
+    localStorage.setItem('agente', agente);
+    localStorage.setItem('escritorio', escritorio);
     history.push('/escritorio')
   };
 
@@ -27,6 +32,8 @@ export const Ingresar = () => {
     console.log('Failed:', errorInfo);
   };
 
+  if (user.agente && user.escritorio) return <Redirect to="/escritorio"/>
+  
   return (
     <>
       <Title level={2}>Ingresar</Title>

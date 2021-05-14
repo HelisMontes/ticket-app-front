@@ -1,25 +1,32 @@
-import React from 'react'
-import { Button, Col, Divider, Row, Typography } from 'antd'
-import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons'
-import { useHideMenu } from '../hooks/useHideMenu'
+import React, { useState } from 'react';
+import { Button, Col, Divider, Row, Typography } from 'antd';
+import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
+import { useHideMenu } from '../hooks/useHideMenu';
+import { getUserStorage } from '../helpers/getUserStorage';
+import { Redirect, useHistory } from 'react-router';
+
 
 const {Text, Title} = Typography
 
 export const Escritorio = () => {
+  const history = useHistory()
   useHideMenu(false);
+  const [user] = useState(getUserStorage())
   const salir = () => {
-    console.log('saliendo.........')
+    localStorage.clear();
+    history.replace('/ingresar');
   }
   const siguiente = () => {
     console.log('Next.......')
   }
+  if (!user.agente || !user.escritorio) return <Redirect to="/ingresar"/>
   return (
     <>
       <Row>
         <Col spam={20}>
-          <Title level={2}>Helis</Title>
+          <Title level={2}>{user.agente}</Title>
           <Text>Usted está  trabajando en el escritorio: </Text>
-          <Text type="success">5</Text>
+          <Text type="success">{user.escritorio}</Text>
         </Col>
         <Col spam={4} align="right">
           <Button 
